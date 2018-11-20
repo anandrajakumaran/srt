@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.company.sales.web.show.ShowEdit"
+        datasource="showDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.sales.web.show">
+    <dsContext>
+        <datasource id="showDs"
+                    class="com.company.sales.entity.Show"
+                    view="show-edit">
+            <collectionDatasource id="showDatesDs"
+                                  property="showDates"/>
+        </datasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="showDs">
+            <column width="250px">
+                <field property="name"/>
+                <field property="type"/>
+                <field property="startDate"/>
+                <field property="endDate"/>
+            </column>
+        </fieldGroup>
+        <groupBox id="showDatesBox"
+                  caption="msg://com.company.sales.entity/Show.showDates">
+            <table id="showDatesTable"
+                   height="200px"
+                   width="100%">
+                <actions>
+                    <action id="create"/>
+                    <action id="edit"/>
+                    <action id="remove"/>
+                </actions>
+                <columns>
+                </columns>
+                <rows datasource="showDatesDs"/>
+                <buttonsPanel>
+                    <button action="showDatesTable.create"/>
+                    <button action="showDatesTable.edit"/>
+                    <button action="showDatesTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

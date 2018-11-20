@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="com.company.sales.web.booking.BookingBrowse"
+        focusComponent="bookingsTable"
+        lookupComponent="bookingsTable"
+        messagesPack="com.company.sales.web.booking">
+    <dsContext>
+        <groupDatasource id="bookingsDs"
+                         class="com.company.sales.entity.Booking"
+                         view="booking-with-customer-show">
+            <query>
+                <![CDATA[select e from sales$Booking e]]>
+            </query>
+        </groupDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="bookingsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="bookingsTable"
+                datasource="bookingsDs">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="bookingsTable"
+                    width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="bookingDate"/>
+                <column id="customer.name"/>
+                <column id="showDateTime.show.name"/>
+                <column id="showDateTime"/>
+                <column id="ticketCategory"/>
+                <column id="bookingType"/>
+                <column id="quantity"/>
+                <column id="amount"/>
+            </columns>
+            <rows datasource="bookingsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="bookingsTable.create"/>
+                <button id="editBtn"
+                        action="bookingsTable.edit"/>
+                <button id="removeBtn"
+                        action="bookingsTable.remove"/>
+            </buttonsPanel>
+        </groupTable>
+    </layout>
+</window>

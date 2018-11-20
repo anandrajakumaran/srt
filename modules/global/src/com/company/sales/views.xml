@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="com.company.sales.entity.Order"
+          extends="_local"
+          name="order-with-customer">
+        <property name="customer"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.sales.entity.OrderLine"
+          extends="_local"
+          name="orderLine-with-product">
+        <property name="product"
+                  view="_local"/>
+    </view>
+    <view class="com.company.sales.entity.Order"
+          extends="_local"
+          name="order-edit">
+        <property name="lines"
+                  view="orderLine-with-product"/>
+        <property name="customer"
+                  view="_minimal"/>
+    </view>
+    <view class="com.company.sales.entity.Booking"
+          extends="_local"
+          name="booking-with-customer-show">
+        <property name="customer"
+                  view="_minimal"/>
+        <property name="showDateTime"
+                  view="_minimal">
+            <property name="show"
+                      view="_minimal"/>
+            <property name="totalTickets"/>
+        </property>
+    </view>
+    <view class="com.company.sales.entity.ShowDate"
+          extends="_local"
+          name="showDate-with-show">
+        <property name="show"
+                  view="_local"/>
+    </view>
+    <view class="com.company.sales.entity.Show"
+          extends="_local"
+          name="show-edit">
+        <property name="showDates"
+                  view="showDate-view"/>
+    </view>
+    <view class="com.company.sales.entity.Booking"
+          extends="_local"
+          name="booking-edit">
+        <property name="customer"
+                  view="_minimal"/>
+        <property name="showDateTime"
+                  view="_minimal">
+            <property name="show"
+                      view="_minimal"/>
+            <property name="totalTickets"/>
+        </property>
+    </view>
+    <view class="com.company.sales.entity.ShowDate"
+          extends="_local"
+          name="showDate-view"/>
+</views>

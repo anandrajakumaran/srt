@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.company.sales.web.customer.CustomerEdit"
+        datasource="customerDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.sales.web.customer">
+    <dsContext>
+        <datasource id="customerDs"
+                    class="com.company.sales.entity.Customer"
+                    view="_local"/>
+        <collectionDatasource id="ordersDs"
+                              class="com.company.sales.entity.Order"
+                              view="_local">
+            <query>
+                <![CDATA[select o from sales$Order o where o.customer.id = :ds$customerDs order by o.date]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="bookingsDs"
+                              class="com.company.sales.entity.Booking"
+                              view="booking-with-customer-show">
+            <query>
+                <![CDATA[select e from sales$Booking e
+where e.customer.id = :ds$customerDs
+order by e.bookingDate desc]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="customerDs">
+            <column width="250px">
+                <field property="name"/>
+                <field property="email"/>
+                <field property="country"/>
+                <field property="phone"/>
+            </column>
+        </fieldGroup>
+        <label value="Bookings"/>
+        <table id="bookingsTable"
+               height="400px"
+               width="656px">
+            <columns>
+                <column id="bookingDate"/>
+                <column id="showDateTime.show.name"/>
+                <column id="showDateTime"/>
+                <column id="ticketCategory"/>
+                <column id="bookingType"/>
+                <column id="quantity"/>
+                <column id="amount"/>
+            </columns>
+            <rows datasource="bookingsDs"/>
+        </table>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

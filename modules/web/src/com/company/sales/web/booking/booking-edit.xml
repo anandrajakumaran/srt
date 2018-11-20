@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editorCaption"
+        class="com.company.sales.web.booking.BookingEdit"
+        datasource="bookingDs"
+        focusComponent="fieldGroup"
+        messagesPack="com.company.sales.web.booking">
+    <dsContext>
+        <datasource id="bookingDs"
+                    class="com.company.sales.entity.Booking"
+                    view="booking-edit"/>
+        <collectionDatasource id="customersDs"
+                              class="com.company.sales.entity.Customer"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from sales$Customer e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="showDateTimesDs"
+                              class="com.company.sales.entity.ShowDate"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from sales$ShowDate e
+where e.show.id = :ds$showsDs]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="showsDs"
+                              class="com.company.sales.entity.Show"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from sales$Show e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="windowActions"
+            spacing="true">
+        <lookupPickerField id="shows"
+                           caption="Show"
+                           optionsDatasource="showsDs"/>
+        <fieldGroup id="fieldGroup"
+                    datasource="bookingDs">
+            <column width="250px">
+                <field optionsDatasource="showDateTimesDs"
+                       property="showDateTime"/>
+                <field property="bookingDate"/>
+                <field optionsDatasource="customersDs"
+                       property="customer"/>
+                <field property="ticketCategory"/>
+                <field property="bookingType"/>
+                <field property="quantity"/>
+                <field property="amount"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>
